@@ -7,6 +7,7 @@ import { Provider, useSelector } from "react-redux"
 import { I18nProvider } from "@lingui/react"
 import store from "./store"
 import { AppState } from "./reducers/rootReducer"
+import Shop from "./features/Shop/Shop"
 
 // Lazy loading main pages
 const Home = lazy(() => import("./features/Home/Home"))
@@ -36,6 +37,7 @@ const App: React.FC = () => {
       >
         <Switch>
           <Route exact path="/" component={Home} />
+          <Route path="/shop" component={Shop} />
         </Switch>
       </Suspense>
     </Router>
