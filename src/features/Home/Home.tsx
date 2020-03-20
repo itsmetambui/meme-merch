@@ -1,42 +1,51 @@
-import React from "react"
-
-interface ItemProps {
-  category: string
-}
-
-const Item: React.FC<ItemProps> = ({ category }: ItemProps) => (
-  <div className="flex items-center justify-center flex-auto h-64 mx-4 my-2 border border-black">
-    <div className="flex flex-col items-center justify-center h-24 px-6 border border-black ">
-      <div className="mb-2 text-2xl font-bold text-gray-900 ">
-        {category.toUpperCase()}
-      </div>
-      <span className="text-xl font-light ">SHOP NOW</span>
-    </div>
-  </div>
-)
+import React, { useState } from "react"
+import MenuItem from "./MenuItem"
 
 const Home: React.FC = () => {
+  const [sections] = useState([
+    {
+      title: "hats",
+      imageUrl: "https://i.ibb.co/cvpntL1/hats.png",
+      id: 1,
+    },
+    {
+      title: "jackets",
+      imageUrl: "https://i.ibb.co/px2tCc3/jackets.png",
+      id: 2,
+    },
+    {
+      title: "sneakers",
+      imageUrl: "https://i.ibb.co/0jqHpnp/sneakers.png",
+      id: 3,
+    },
+    {
+      title: "womens",
+      imageUrl: "https://i.ibb.co/GCCdy8t/womens.png",
+      size: "large",
+      id: 4,
+    },
+    {
+      title: "mens",
+      imageUrl: "https://i.ibb.co/R70vBrQ/men.png",
+      size: "large",
+      id: 5,
+    },
+  ])
+
   return (
     <div className="container py-10 mx-auto text-4xl font-bold">
       <h1 className="mb-10 text-center">Welcome to my Homepage</h1>
       <div className="flex flex-wrap w-full">
-        <div className="w-full md:w-1/3">
-          <Item category="hat" />
-        </div>
-        <div className="w-full md:w-1/3">
-          <Item category="jackets" />
-        </div>
-        <div className="w-full md:w-1/3">
-          <Item category="shoes" />
-        </div>
-      </div>
-      <div className="flex flex-wrap w-full">
-        <div className="w-full md:w-1/2">
-          <Item category="womens" />
-        </div>
-        <div className="w-full md:w-1/2">
-          <Item category="mens" />
-        </div>
+        {sections.map(section => (
+          <div
+            key={section.id}
+            className={`w-full md:${
+              section.size === "large" ? "w-1/2" : "w-1/3"
+            }`}
+          >
+            <MenuItem {...section} />
+          </div>
+        ))}
       </div>
     </div>
   )
