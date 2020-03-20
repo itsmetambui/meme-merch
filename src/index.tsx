@@ -10,7 +10,7 @@ import store from "./store"
 import { AppState } from "./reducers/rootReducer"
 
 // Lazy loading main pages
-const Home = lazy(() => import("./pages/Home/index"))
+const Home = lazy(() => import("./features/Home/index"))
 
 const I18nWrapper: React.FC = () => {
   const locale = useSelector((state: AppState) => state.locale)
