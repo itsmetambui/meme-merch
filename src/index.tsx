@@ -10,7 +10,7 @@ import store from "./store"
 import { AppState } from "./reducers/rootReducer"
 
 // Lazy loading main pages
-const Home = lazy(() => import("./features/Home/index"))
+const Home = lazy(() => import("./features/Home/Home"))
 
 const I18nWrapper: React.FC = () => {
   const locale = useSelector((state: AppState) => state.locale)
@@ -30,7 +30,7 @@ const App: React.FC = () => {
     <Router>
       <Suspense
         fallback={
-          <div className="text-center pt-12">
+          <div className="pt-12 text-center">
             <Spin></Spin>
           </div>
         }
