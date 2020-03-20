@@ -5,7 +5,6 @@ import * as serviceWorker from "./serviceWorker"
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom"
 import { Provider, useSelector } from "react-redux"
 import { I18nProvider } from "@lingui/react"
-import { Spin } from "antd"
 import store from "./store"
 import { AppState } from "./reducers/rootReducer"
 
@@ -31,7 +30,7 @@ const App: React.FC = () => {
       <Suspense
         fallback={
           <div className="pt-12 text-center">
-            <Spin></Spin>
+            <p>Loading...</p>
           </div>
         }
       >
