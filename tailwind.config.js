@@ -13,6 +13,8 @@ module.exports = {
       "first",
       "last",
     ],
+    borderWidth: ["responsive", "hover", "focus"],
+    borderStyle: ["responsive", "hover", "focus"],
   },
   plugins: [],
 }

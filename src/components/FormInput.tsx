@@ -1,6 +1,7 @@
 import React from "react"
 
 import "./FormInput.scss"
+import { NestDataObject } from "react-hook-form"
 
 interface FormInputProps
   extends React.DetailedHTMLProps<
@@ -8,11 +9,12 @@ interface FormInputProps
     HTMLInputElement
   > {
   label: string
+  error?: NestDataObject<Record<string, any>>
 }
 
 const FormInput = React.forwardRef<HTMLInputElement, FormInputProps>(
-  ({ label, ...inputProps }, ref) => (
-    <div className="group">
+  ({ label, error, ...inputProps }, ref) => (
+    <div className="mb-8 group">
       <input className="form-input" {...inputProps} ref={ref} />
       {label && (
         <label
@@ -21,6 +23,9 @@ const FormInput = React.forwardRef<HTMLInputElement, FormInputProps>(
         >
           {label}
         </label>
+      )}
+      {error && (
+        <span className="text-sm text-red-500">This field is required</span>
       )}
     </div>
   ),
