@@ -1,4 +1,4 @@
-import React, { Suspense, lazy } from "react"
+import React, { Suspense, lazy, useEffect, useState } from "react"
 import ReactDOM from "react-dom"
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom"
 import { Provider, useSelector } from "react-redux"
@@ -11,6 +11,7 @@ import store from "./store"
 import "./tailwind-generated.css"
 import Header from "./features/header/Header"
 import AuthPage from "./features/authentication/AuthPage"
+import { auth } from "./config/firebase"
 
 // Lazy loading main pages
 const Home = lazy(() => import("./features/home/Home"))
@@ -29,6 +30,17 @@ const I18nWrapper: React.FC = () => {
 }
 
 const App: React.FC = () => {
+  const [currentUser, setCurrentUser] = useState<
+    firebase.User | null | undefined
+  >(null)
+
+  useEffect(() => {
+    const unsubscribe = auth.onAuthStateChanged(user => {
+      setCurrentUser(user)
+    })
+    return () => unsubscribe()
+  })
+
   return (
     <Router>
       <Suspense
@@ -38,7 +50,7 @@ const App: React.FC = () => {
           </div>
         }
       >
-        <Header />
+        <Header user={currentUser} />
         <Switch>
           <Route exact path="/" component={Home} />
           <Route path="/shop" component={Shop} />

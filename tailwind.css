@@ -12,3 +12,7 @@ body {
   padding: 20px 60px;
   background-color: white;
 }
+
+* {
+  box-sizing: border-box;
+}
