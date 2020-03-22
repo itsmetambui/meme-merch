@@ -8,26 +8,27 @@ type FormInputProps = React.DetailedHTMLProps<
   HTMLInputElement
 > & {
   label: string
+  hasValue: boolean
   error?: FieldError | undefined
 }
 
 const FormInput = React.forwardRef<HTMLInputElement, FormInputProps>(
-  ({ label, error, ...inputProps }, ref) => (
-    <div className="mb-8 group">
-      <input className="form-input" {...inputProps} ref={ref} />
-      {label && (
-        <label
-          htmlFor={inputProps.name}
-          className={`${inputProps.value ? "shrink" : ""} form-input-label`}
-        >
-          {label}
-        </label>
-      )}
-      {error && (
-        <span className="text-sm text-red-500">This field is required</span>
-      )}
-    </div>
-  ),
+  ({ label, error, hasValue, ...inputProps }, ref) => {
+    return (
+      <div className="mb-8 group">
+        <input className="form-input" {...inputProps} ref={ref} />
+        {label && (
+          <label
+            htmlFor={inputProps.name}
+            className={`${hasValue ? "shrink" : ""} form-input-label`}
+          >
+            {label}
+          </label>
+        )}
+        {error && <span className="text-sm text-red-500">{error.message}</span>}
+      </div>
+    )
+  },
 )
 
 export default FormInput

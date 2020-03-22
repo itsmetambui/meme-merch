@@ -10,7 +10,7 @@ type FormData = {
 }
 
 const SigninForm: React.FC = () => {
-  const { register, handleSubmit, errors } = useForm<FormData>()
+  const { register, handleSubmit, errors, watch } = useForm<FormData>()
   const onSubmit = (data: FormData) => console.log(data)
 
   return (
@@ -22,7 +22,10 @@ const SigninForm: React.FC = () => {
         <FormInput
           type="email"
           name="email"
-          ref={register({ required: true })}
+          hasValue={!!watch("email")}
+          ref={register({
+            required: { value: true, message: "Email is required" },
+          })}
           label="Email"
           error={errors.email}
         />
@@ -30,7 +33,10 @@ const SigninForm: React.FC = () => {
         <FormInput
           type="password"
           name="password"
-          ref={register({ required: true })}
+          hasValue={!!watch("password")}
+          ref={register({
+            required: { value: true, message: "Password is required" },
+          })}
           label="Password"
           error={errors.password}
         />

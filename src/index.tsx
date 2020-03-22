@@ -42,10 +42,12 @@ const App: React.FC = () => {
         userRef?.onSnapshot(snapshot =>
           setCurrentUser({ id: snapshot.id, ...snapshot.data() }),
         )
+      } else {
+        setCurrentUser(null)
       }
     })
     return () => unsubscribe()
-  })
+  }, [])
 
   return (
     <Router>

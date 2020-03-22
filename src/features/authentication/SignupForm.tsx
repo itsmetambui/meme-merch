@@ -11,7 +11,9 @@ type FormData = {
 }
 
 const SigninForm: React.FC = () => {
-  const { register, handleSubmit, errors } = useForm<FormData>()
+  const { register, handleSubmit, getValues, watch, errors } = useForm<
+    FormData
+  >()
   const onSubmit = (data: FormData) => console.log(data)
 
   return (
@@ -23,7 +25,10 @@ const SigninForm: React.FC = () => {
         <FormInput
           type="text"
           name="displayName"
-          ref={register({ required: true })}
+          hasValue={!!watch("displayName")}
+          ref={register({
+            required: { value: true, message: "Display Name is required" },
+          })}
           label="Display Name"
           error={errors.displayName}
         />
@@ -31,7 +36,10 @@ const SigninForm: React.FC = () => {
         <FormInput
           type="email"
           name="email"
-          ref={register({ required: true })}
+          hasValue={!!watch("email")}
+          ref={register({
+            required: { value: true, message: "Email is required" },
+          })}
           label="Email"
           error={errors.email}
         />
@@ -39,7 +47,10 @@ const SigninForm: React.FC = () => {
         <FormInput
           type="password"
           name="password"
-          ref={register({ required: true })}
+          hasValue={!!watch("password")}
+          ref={register({
+            required: { value: true, message: "Password is required" },
+          })}
           label="Password"
           error={errors.password}
         />
@@ -47,7 +58,17 @@ const SigninForm: React.FC = () => {
         <FormInput
           type="password"
           name="confirmPassword"
-          ref={register({ required: true })}
+          hasValue={!!watch("confirmPassword")}
+          ref={register({
+            required: { value: true, message: "Confirm Password is required" },
+            validate: value => {
+              if (value === getValues()["password"]) {
+                return true
+              } else {
+                return "The passwords do not match"
+              }
+            },
+          })}
           label="Confirm Password"
           error={errors.confirmPassword}
         />
