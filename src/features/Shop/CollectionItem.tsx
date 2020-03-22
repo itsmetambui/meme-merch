@@ -1,24 +1,29 @@
 import React from "react"
+import styled from "styled-components"
+
 import { CollectionItemProps } from "./interfaces"
-import "./CollectionItem.scss"
+
+const ItemContainer = styled.div`
+  height: 350px;
+`
 
 const CollectionItem: React.FC<CollectionItemProps> = ({
   name,
   price,
   imageUrl,
 }) => (
-  <div className="collection-item">
+  <ItemContainer className="flex flex-col items-center">
     <div
-      className="image"
+      className="w-full h-full mb-1 bg-center bg-cover"
       style={{
         backgroundImage: `url(${imageUrl})`,
       }}
     />
-    <div className="collection-footer">
-      <span className="name">{name}</span>
-      <span className="price">{price}</span>
+    <div className="flex justify-between w-full text-xl">
+      <span>{name}</span>
+      <span>{price}</span>
     </div>
-  </div>
+  </ItemContainer>
 )
 
 export default CollectionItem

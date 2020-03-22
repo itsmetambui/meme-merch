@@ -6,8 +6,8 @@ import data from "../../config/shop-data"
 const SHOP: React.FC = () => {
   return (
     <div className="shop-page">
-      {data.collections.map(({ id, ...otherCollectionProps }) => (
-        <CollectionPreview key={id} {...otherCollectionProps} />
+      {data.collections.map(collection => (
+        <CollectionPreview key={collection.id} {...collection} />
       ))}
     </div>
   )

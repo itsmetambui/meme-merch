@@ -1,12 +1,12 @@
 export interface CollectionItemProps {
-  id?: number
+  id: number
   name: string
   imageUrl: string
   price: number
 }
 
 export interface CollectionPreviewProps {
-  id?: number
+  id: number
   title: string
   routeName: string
   items: CollectionItemProps[]
