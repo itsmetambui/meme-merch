@@ -1,6 +1,7 @@
 import React from "react"
 import MenuItem from "./MenuItem"
 
+// TODO: replace with tailwind and styled-component
 import data from "../../config/shop-data"
 
 const Home: React.FC = () => {
