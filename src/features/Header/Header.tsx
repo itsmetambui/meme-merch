@@ -1,24 +1,27 @@
 import React from "react"
 import { Link } from "react-router-dom"
+import styled from "styled-components"
 
 import { ReactComponent as Logo } from "../../assets/crown.svg"
 
-import "./Header.scss"
+const HeaderContainer = styled.div`
+  height: 70px;
+`
 
 const Header: React.FC = () => (
-  <div className="header">
-    <Link className="logo-container" to="/">
-      <Logo className="logo" />
+  <HeaderContainer className="flex justify-between w-full mb-6">
+    <Link className="flex items-center" to="/">
+      <Logo />
     </Link>
-    <div className="options">
-      <Link className="option" to="/shop">
+    <div className="flex items-center justify-end w-1/2 h-full">
+      <Link className="px-8 py-4" to="/shop">
         SHOP
       </Link>
       <Link className="option" to="/shop">
         CONTACT
       </Link>
     </div>
-  </div>
+  </HeaderContainer>
 )
 
 export default Header
