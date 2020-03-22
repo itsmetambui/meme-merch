@@ -11,7 +11,7 @@ import store from "./store"
 import "./tailwind-generated.css"
 import Header from "./features/header/Header"
 import AuthPage from "./features/authentication/AuthPage"
-import { auth } from "./config/firebase"
+import { auth, createUserProfileDocument } from "./config/firebase"
 
 // Lazy loading main pages
 const Home = lazy(() => import("./features/home/Home"))
@@ -31,12 +31,18 @@ const I18nWrapper: React.FC = () => {
 
 const App: React.FC = () => {
   const [currentUser, setCurrentUser] = useState<
-    firebase.User | null | undefined
+    firebase.firestore.DocumentData | undefined | null
   >(null)
 
   useEffect(() => {
-    const unsubscribe = auth.onAuthStateChanged(user => {
-      setCurrentUser(user)
+    const unsubscribe = auth.onAuthStateChanged(async userAuth => {
+      if (userAuth) {
+        const userRef = await createUserProfileDocument(userAuth)
+
+        userRef?.onSnapshot(snapshot =>
+          setCurrentUser({ id: snapshot.id, ...snapshot.data() }),
+        )
+      }
     })
     return () => unsubscribe()
   })
@@ -50,7 +56,7 @@ const App: React.FC = () => {
           </div>
         }
       >
-        <Header user={currentUser} />
+        <Header userEmail={currentUser?.email} />
         <Switch>
           <Route exact path="/" component={Home} />
           <Route path="/shop" component={Shop} />

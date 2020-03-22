@@ -10,10 +10,10 @@ const HeaderContainer = styled.div`
 `
 
 type HeaderProps = {
-  user?: firebase.User | null
+  userEmail?: string | null
 }
 
-const Header: React.FC<HeaderProps> = ({ user }) => (
+const Header: React.FC<HeaderProps> = ({ userEmail }) => (
   <HeaderContainer className="flex justify-between w-full mb-6">
     <Link className="flex items-center" to="/">
       <Logo />
@@ -25,12 +25,12 @@ const Header: React.FC<HeaderProps> = ({ user }) => (
       <Link className="px-4 py-4 text-xl" to="/shop">
         CONTACT
       </Link>
-      {user ? (
+      {userEmail ? (
         <>
           <button className="px-4 py-4 text-xl" onClick={() => auth.signOut()}>
             SIGN OUT
           </button>
-          <span className="px-4 py-4">{user.email}</span>
+          <span className="px-4 py-4">{userEmail}</span>
         </>
       ) : (
         <Link className="px-4 py-4 text-xl" to="/auth">
