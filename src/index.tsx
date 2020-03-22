@@ -9,6 +9,7 @@ import Shop from "./features/Shop/Shop"
 import * as serviceWorker from "./serviceWorker"
 import store from "./store"
 import "./tailwind-generated.css"
+import Header from "./features/Header/Header"
 
 // Lazy loading main pages
 const Home = lazy(() => import("./features/Home/Home"))
@@ -36,6 +37,7 @@ const App: React.FC = () => {
           </div>
         }
       >
+        <Header />
         <Switch>
           <Route exact path="/" component={Home} />
           <Route path="/shop" component={Shop} />
