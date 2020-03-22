@@ -3,9 +3,16 @@ import { useForm } from "react-hook-form"
 import FormInput from "../../components/FormInput"
 import CustomButton from "../../components/CustomButton"
 
+type FormData = {
+  displayName: string
+  email: string
+  password: string
+  confirmPassword: string
+}
+
 const SigninForm: React.FC = () => {
-  const { register, handleSubmit, errors } = useForm()
-  const onSubmit = (data: Record<string, string>) => console.log(data)
+  const { register, handleSubmit, errors } = useForm<FormData>()
+  const onSubmit = (data: FormData) => console.log(data)
 
   return (
     <div className="mt-4">

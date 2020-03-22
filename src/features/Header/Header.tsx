@@ -9,7 +9,7 @@ const HeaderContainer = styled.div`
   height: 70px;
 `
 
-interface HeaderProps {
+type HeaderProps = {
   user?: firebase.User | null
 }
 

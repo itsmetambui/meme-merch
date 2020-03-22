@@ -1,7 +1,7 @@
 import React from "react"
 import "./MenuItem.scss"
 
-interface ItemProps {
+type ItemProps = {
   title: string
   imageUrl: string
   size?: string

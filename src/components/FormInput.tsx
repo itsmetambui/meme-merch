@@ -1,15 +1,14 @@
 import React from "react"
 
 import "./FormInput.scss"
-import { NestDataObject } from "react-hook-form"
+import { FieldError } from "react-hook-form"
 
-interface FormInputProps
-  extends React.DetailedHTMLProps<
-    React.InputHTMLAttributes<HTMLInputElement>,
-    HTMLInputElement
-  > {
+type FormInputProps = React.DetailedHTMLProps<
+  React.InputHTMLAttributes<HTMLInputElement>,
+  HTMLInputElement
+> & {
   label: string
-  error?: NestDataObject<Record<string, any>>
+  error?: FieldError | undefined
 }
 
 const FormInput = React.forwardRef<HTMLInputElement, FormInputProps>(
