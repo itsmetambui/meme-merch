@@ -1,13 +1,14 @@
 import React, { Suspense, lazy } from "react"
 import ReactDOM from "react-dom"
-import "./tailwind-generated.css"
-import * as serviceWorker from "./serviceWorker"
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom"
 import { Provider, useSelector } from "react-redux"
 import { I18nProvider } from "@lingui/react"
-import store from "./store"
+
 import { AppState } from "./reducers/rootReducer"
 import Shop from "./features/Shop/Shop"
+import * as serviceWorker from "./serviceWorker"
+import store from "./store"
+import "./tailwind-generated.css"
 
 // Lazy loading main pages
 const Home = lazy(() => import("./features/Home/Home"))
