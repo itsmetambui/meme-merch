@@ -2,6 +2,7 @@ import React from "react"
 import { useForm } from "react-hook-form"
 import FormInput from "../../components/FormInput"
 import CustomButton from "../../components/CustomButton"
+import { auth, createUserProfileDocument } from "../../config/firebase"
 
 type FormData = {
   displayName: string
@@ -11,10 +12,22 @@ type FormData = {
 }
 
 const SigninForm: React.FC = () => {
-  const { register, handleSubmit, getValues, watch, errors } = useForm<
+  const { register, handleSubmit, getValues, watch, errors, reset } = useForm<
     FormData
   >()
-  const onSubmit = (data: FormData) => console.log(data)
+  const onSubmit = async (data: FormData) => {
+    const { displayName, email, password } = data
+    try {
+      const { user } = await auth.createUserWithEmailAndPassword(
+        email,
+        password,
+      )
+      await createUserProfileDocument(user, { displayName })
+      reset()
+    } catch (error) {
+      console.error(error)
+    }
+  }
 
   return (
     <div className="mt-4">
@@ -50,6 +63,10 @@ const SigninForm: React.FC = () => {
           hasValue={!!watch("password")}
           ref={register({
             required: { value: true, message: "Password is required" },
+            min: {
+              value: 6,
+              message: "Password should has at least 6 characters",
+            },
           })}
           label="Password"
           error={errors.password}
@@ -61,6 +78,10 @@ const SigninForm: React.FC = () => {
           hasValue={!!watch("confirmPassword")}
           ref={register({
             required: { value: true, message: "Confirm Password is required" },
+            min: {
+              value: 6,
+              message: "Password should has at least 6 characters",
+            },
             validate: value => {
               if (value === getValues()["password"]) {
                 return true
