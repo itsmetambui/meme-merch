@@ -14,11 +14,14 @@ const Header: React.FC = () => (
       <Logo />
     </Link>
     <div className="flex items-center justify-end w-1/2 h-full">
-      <Link className="px-8 py-4" to="/shop">
+      <Link className="px-4 py-4" to="/shop">
         SHOP
       </Link>
-      <Link className="option" to="/shop">
+      <Link className="px-4 py-4" to="/shop">
         CONTACT
+      </Link>
+      <Link className="px-4 py-4" to="/auth">
+        SIGNIN
       </Link>
     </div>
   </HeaderContainer>

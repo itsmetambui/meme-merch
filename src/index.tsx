@@ -5,14 +5,15 @@ import { Provider, useSelector } from "react-redux"
 import { I18nProvider } from "@lingui/react"
 
 import { AppState } from "./reducers/rootReducer"
-import Shop from "./features/Shop/Shop"
+import Shop from "./features/shop/Shop"
 import * as serviceWorker from "./serviceWorker"
 import store from "./store"
 import "./tailwind-generated.css"
-import Header from "./features/Header/Header"
+import Header from "./features/header/Header"
+import AuthPage from "./features/authentication/AuthPage"
 
 // Lazy loading main pages
-const Home = lazy(() => import("./features/Home/Home"))
+const Home = lazy(() => import("./features/home/Home"))
 
 const I18nWrapper: React.FC = () => {
   const locale = useSelector((state: AppState) => state.locale)
@@ -41,6 +42,7 @@ const App: React.FC = () => {
         <Switch>
           <Route exact path="/" component={Home} />
           <Route path="/shop" component={Shop} />
+          <Route path="/auth" component={AuthPage} />
         </Switch>
       </Suspense>
     </Router>
