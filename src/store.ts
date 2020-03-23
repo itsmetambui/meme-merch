@@ -6,9 +6,15 @@ import rootSaga from "./sagas/rootSaga"
 
 const sagaMiddleware = createSagaMiddleware()
 
+const middleware = [...getDefaultMiddleware({ thunk: false }), sagaMiddleware]
+if (process.env.NODE_ENV === `development`) {
+  const { logger } = require(`redux-logger`)
+  middleware.push(logger)
+}
+
 const store = configureStore({
   reducer: rootReducer,
-  middleware: [...getDefaultMiddleware({ thunk: false }), sagaMiddleware],
+  middleware,
 })
 
 sagaMiddleware.run(rootSaga)

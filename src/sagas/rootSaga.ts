@@ -1,6 +1,5 @@
 import { all, takeEvery } from "redux-saga/effects"
 import { PayloadActionWithResolve } from "../reducers/rootReducer"
-import tasksSaga from "./tasksSaga"
 
 export default function* rootSaga() {
   // Attach an "onResolve" method on any
@@ -18,5 +17,5 @@ export default function* rootSaga() {
       }
     },
   )
-  yield all([tasksSaga()])
+  yield all([])
 }
