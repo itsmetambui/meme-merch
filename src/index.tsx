@@ -1,6 +1,11 @@
 import React, { Suspense, lazy, useEffect } from "react"
 import ReactDOM from "react-dom"
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom"
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Redirect,
+} from "react-router-dom"
 import { Provider, useSelector, useDispatch } from "react-redux"
 import { I18nProvider } from "@lingui/react"
 
@@ -30,6 +35,7 @@ const I18nWrapper: React.FC = () => {
 }
 
 const App: React.FC = () => {
+  const currentUser = useSelector((state: AppState) => state.auth.currentUser)
   const dispatch = useDispatch<AppDispatch>()
 
   useEffect(() => {
@@ -68,7 +74,10 @@ const App: React.FC = () => {
         <Switch>
           <Route exact path="/" component={Home} />
           <Route path="/shop" component={Shop} />
-          <Route path="/auth" component={AuthPage} />
+          <Route
+            path="/auth"
+            render={() => (currentUser ? <Redirect to="/" /> : <AuthPage />)}
+          />
         </Switch>
       </Suspense>
     </Router>
