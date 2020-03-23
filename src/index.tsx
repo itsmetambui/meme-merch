@@ -1,19 +1,19 @@
-import React, { Suspense, lazy, useEffect, useState } from "react"
+import React, { Suspense, lazy, useEffect } from "react"
 import ReactDOM from "react-dom"
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom"
-import { Provider, useSelector } from "react-redux"
+import { Provider, useSelector, useDispatch } from "react-redux"
 import { I18nProvider } from "@lingui/react"
 
 import { AppState } from "./reducers/rootReducer"
 import Shop from "./features/shop/Shop"
 import * as serviceWorker from "./serviceWorker"
-import store from "./store"
+import store, { AppDispatch } from "./store"
 import "./tailwind-generated.css"
 import Header from "./features/header/Header"
 import AuthPage from "./features/authentication/AuthPage"
 import { auth, createUserProfileDocument } from "./config/firebase"
+import { setCurrentUser } from "./reducers/authSlice"
 
-// Lazy loading main pages
 const Home = lazy(() => import("./features/home/Home"))
 
 const I18nWrapper: React.FC = () => {
@@ -30,24 +30,30 @@ const I18nWrapper: React.FC = () => {
 }
 
 const App: React.FC = () => {
-  const [currentUser, setCurrentUser] = useState<
-    firebase.firestore.DocumentData | undefined | null
-  >(null)
+  const dispatch = useDispatch<AppDispatch>()
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged(async userAuth => {
       if (userAuth) {
         const userRef = await createUserProfileDocument(userAuth)
 
-        userRef?.onSnapshot(snapshot =>
-          setCurrentUser({ id: snapshot.id, ...snapshot.data() }),
-        )
+        userRef?.onSnapshot(snapshot => {
+          const data = snapshot.data()
+          dispatch(
+            setCurrentUser({
+              id: snapshot.id,
+              email: data?.email,
+              displayName: data?.displayName,
+              createdAt: data?.createdAt.toDate().toJSON(),
+            }),
+          )
+        })
       } else {
-        setCurrentUser(null)
+        dispatch(setCurrentUser(null))
       }
     })
     return () => unsubscribe()
-  }, [])
+  }, [dispatch])
 
   return (
     <Router>
@@ -58,7 +64,7 @@ const App: React.FC = () => {
           </div>
         }
       >
-        <Header userEmail={currentUser?.email} />
+        <Header />
         <Switch>
           <Route exact path="/" component={Home} />
           <Route path="/shop" component={Shop} />

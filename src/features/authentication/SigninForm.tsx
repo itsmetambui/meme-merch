@@ -11,6 +11,7 @@ type FormData = {
 
 const SigninForm: React.FC = () => {
   const { register, handleSubmit, errors, watch, reset } = useForm<FormData>()
+
   const onSubmit = async (data: FormData) => {
     const { email, password } = data
     try {
@@ -20,6 +21,7 @@ const SigninForm: React.FC = () => {
       console.error(error)
     }
   }
+
   return (
     <div className="mt-4">
       <h2 className="mb-4 text-3xl font-bold">I already have an account</h2>
