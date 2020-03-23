@@ -15,7 +15,7 @@ const initialState: AuthState = {
   currentUser: null,
 }
 
-const currentUserSlide = createSlice({
+const authSlide = createSlice({
   name: "currentUser",
   initialState,
   reducers: {
@@ -25,6 +25,6 @@ const currentUserSlide = createSlice({
   },
 })
 
-export const { setCurrentUser } = currentUserSlide.actions
+export const { setCurrentUser } = authSlide.actions
 
-export default currentUserSlide
+export default authSlide

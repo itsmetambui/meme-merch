@@ -7,15 +7,18 @@ import { ReactComponent as Logo } from "../../assets/crown.svg"
 import { auth } from "../../config/firebase"
 import { AppState } from "../../reducers/rootReducer"
 import CartIcon from "../cart/CartIcon"
+import CartDropdown from "../cart/CartDropdown"
 
 const HeaderContainer = styled.div`
   height: 70px;
 `
 
 const Header: React.FC = () => {
-  const currentUser = useSelector((state: AppState) => state.auth.currentUser)
+  const { currentUser } = useSelector((state: AppState) => state.auth)
+  const { isCartDropdownOpen } = useSelector((state: AppState) => state.cart)
+
   return (
-    <HeaderContainer className="flex justify-between w-full mb-6">
+    <HeaderContainer className="relative flex justify-between w-full mb-6">
       <Link className="flex items-center" to="/">
         <Logo />
       </Link>
@@ -43,6 +46,7 @@ const Header: React.FC = () => {
         )}
         <CartIcon />
       </div>
+      {isCartDropdownOpen && <CartDropdown />}
     </HeaderContainer>
   )
 }
