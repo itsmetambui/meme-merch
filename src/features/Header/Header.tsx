@@ -6,6 +6,7 @@ import { useSelector } from "react-redux"
 import { ReactComponent as Logo } from "../../assets/crown.svg"
 import { auth } from "../../config/firebase"
 import { AppState } from "../../reducers/rootReducer"
+import CartIcon from "../cart/CartIcon"
 
 const HeaderContainer = styled.div`
   height: 70px;
@@ -40,6 +41,7 @@ const Header: React.FC = () => {
             SIGN IN
           </Link>
         )}
+        <CartIcon />
       </div>
     </HeaderContainer>
   )
