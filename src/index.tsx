@@ -8,10 +8,11 @@ import {
 } from "react-router-dom"
 import { Provider, useSelector, useDispatch } from "react-redux"
 import { I18nProvider } from "@lingui/react"
+import { PersistGate } from "redux-persist/integration/react"
 
 import { AppState } from "./reducers/rootReducer"
 import * as serviceWorker from "./serviceWorker"
-import store, { AppDispatch } from "./store"
+import store, { AppDispatch, persistor } from "./store"
 import "./tailwind-generated.css"
 import Header from "./features/header/Header"
 import AuthPage from "./features/authentication/AuthPage"
@@ -64,24 +65,26 @@ const App: React.FC = () => {
 
   return (
     <Router>
-      <Suspense
-        fallback={
-          <div className="pt-12 text-center">
-            <p>Loading...</p>
-          </div>
-        }
-      >
-        <Header />
-        <Switch>
-          <Route exact path="/" component={HomePage} />
-          <Route path="/shop" component={ShopPage} />
-          <Route path="/checkout" component={CheckoutPage} />
-          <Route
-            path="/auth"
-            render={() => (currentUser ? <Redirect to="/" /> : <AuthPage />)}
-          />
-        </Switch>
-      </Suspense>
+      <PersistGate loading="Loading..." persistor={persistor}>
+        <Suspense
+          fallback={
+            <div className="pt-12 text-center">
+              <p>Loading...</p>
+            </div>
+          }
+        >
+          <Header />
+          <Switch>
+            <Route exact path="/" component={HomePage} />
+            <Route path="/shop" component={ShopPage} />
+            <Route path="/checkout" component={CheckoutPage} />
+            <Route
+              path="/auth"
+              render={() => (currentUser ? <Redirect to="/" /> : <AuthPage />)}
+            />
+          </Switch>
+        </Suspense>
+      </PersistGate>
     </Router>
   )
 }
