@@ -37,7 +37,7 @@ const CollectionItem: React.FC<CollectionItemProps> = ({
       />
       <div className="flex justify-between w-full text-xl">
         <span>{name}</span>
-        <span>{price}</span>
+        <span>${price}</span>
       </div>
 
       <CustomButton
