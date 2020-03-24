@@ -55,7 +55,8 @@ const SigninForm: React.FC = () => {
             Sign in
           </CustomButton>
           <CustomButton
-            className="w-full bg-blue-600 md:w-auto hover:border-blue-600 hover:text-blue-600"
+            color="blue"
+            className="w-full md:w-auto"
             onClick={signInWithGoogle}
           >
             Sign in with Google

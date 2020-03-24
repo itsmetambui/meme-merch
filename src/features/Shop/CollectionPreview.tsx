@@ -13,7 +13,10 @@ const CollectionPreview: React.FC<CollectionPreviewProps> = ({
         {items
           .filter((item, idx) => idx < 4)
           .map(collection => (
-            <div key={collection.id} className="w-full px-8 sm:w-1/2 md:w-1/4">
+            <div
+              key={collection.id}
+              className="w-full px-0 sm:px-8 sm:w-1/2 md:w-1/4"
+            >
               <CollectionItem {...collection} />
             </div>
           ))}
