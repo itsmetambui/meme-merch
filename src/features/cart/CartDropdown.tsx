@@ -6,6 +6,7 @@ import CartItem from "./CartItem"
 import { useSelector } from "react-redux"
 import { AppState } from "../../reducers/rootReducer"
 import { CartItemWithQuantity } from "../../reducers/cartSlice"
+import { useHistory } from "react-router-dom"
 
 const CartDropdownContainer = styled.div`
   width: 260px;
@@ -20,6 +21,7 @@ const CartItemsContainer = styled.div`
 `
 
 const CartDropdown: React.FC = () => {
+  const history = useHistory()
   const items = useSelector((state: AppState) => state.cart.cartItems)
 
   return (
@@ -33,7 +35,12 @@ const CartDropdown: React.FC = () => {
           <span className="mt-20 text-xl text-center">Your cart is empty</span>
         )}
       </CartItemsContainer>
-      <CustomButton className="mt-auto">GO TO CHECKOUT</CustomButton>
+      <CustomButton
+        onClick={() => history.push("/checkout")}
+        className="mt-auto"
+      >
+        GO TO CHECKOUT
+      </CustomButton>
     </CartDropdownContainer>
   )
 }

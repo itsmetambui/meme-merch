@@ -10,16 +10,17 @@ import { Provider, useSelector, useDispatch } from "react-redux"
 import { I18nProvider } from "@lingui/react"
 
 import { AppState } from "./reducers/rootReducer"
-import Shop from "./features/shop/Shop"
 import * as serviceWorker from "./serviceWorker"
 import store, { AppDispatch } from "./store"
 import "./tailwind-generated.css"
 import Header from "./features/header/Header"
 import AuthPage from "./features/authentication/AuthPage"
+import ShopPage from "./features/shop/ShopPage"
+import CheckoutPage from "./features/checkout/CheckoutPage"
 import { auth, createUserProfileDocument } from "./config/firebase"
 import { setCurrentUser } from "./reducers/authSlice"
 
-const Home = lazy(() => import("./features/home/Home"))
+const HomePage = lazy(() => import("./features/home/HomePage"))
 
 const I18nWrapper: React.FC = () => {
   const locale = useSelector((state: AppState) => state.locale)
@@ -72,8 +73,9 @@ const App: React.FC = () => {
       >
         <Header />
         <Switch>
-          <Route exact path="/" component={Home} />
-          <Route path="/shop" component={Shop} />
+          <Route exact path="/" component={HomePage} />
+          <Route path="/shop" component={ShopPage} />
+          <Route path="/checkout" component={CheckoutPage} />
           <Route
             path="/auth"
             render={() => (currentUser ? <Redirect to="/" /> : <AuthPage />)}
