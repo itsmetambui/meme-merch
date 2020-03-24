@@ -25,9 +25,13 @@ const CartDropdown: React.FC = () => {
   return (
     <CartDropdownContainer className="absolute flex flex-col p-6 bg-white border border-black border-solid">
       <CartItemsContainer className="flex flex-col overflow-y-auto">
-        {items.map((item: CartItemWithQuantity) => (
-          <CartItem key={item.id} {...item} />
-        ))}
+        {items.length ? (
+          items.map((item: CartItemWithQuantity) => (
+            <CartItem key={item.id} {...item} />
+          ))
+        ) : (
+          <span className="mt-20 text-xl text-center">Your cart is empty</span>
+        )}
       </CartItemsContainer>
       <CustomButton className="mt-auto">GO TO CHECKOUT</CustomButton>
     </CartDropdownContainer>
