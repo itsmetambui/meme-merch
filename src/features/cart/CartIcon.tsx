@@ -1,13 +1,18 @@
 import React from "react"
 import { useDispatch } from "react-redux"
+import { useSelector } from "react-redux"
 
+import { totalCartItemSelector } from "../../reducers/cartSlice"
+import { AppState } from "../../reducers/rootReducer"
 import { ReactComponent as ShoppingIcon } from "../../assets/shopping-bag.svg"
 import { toogleCartDropdown } from "../../reducers/cartSlice"
 import { AppDispatch } from "../../store"
 
 const CartIcon: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>()
-
+  const totalCartItems = totalCartItemSelector(
+    useSelector<AppState>(state => state),
+  )
   return (
     <div
       onClick={() => dispatch(toogleCartDropdown())}
@@ -15,7 +20,7 @@ const CartIcon: React.FC = () => {
     >
       <ShoppingIcon className="w-8 h-8" />
       <span className="absolute text-sm font-bold" style={{ bottom: 18 }}>
-        0
+        {totalCartItems}
       </span>
     </div>
   )

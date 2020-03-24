@@ -19,7 +19,7 @@ const authSlide = createSlice({
   name: "currentUser",
   initialState,
   reducers: {
-    setCurrentUser: (state, action: PayloadAction<CurrentUser>) => {
+    setCurrentUser: (state, action: PayloadAction<CurrentUser>): void => {
       state.currentUser = action.payload
     },
   },

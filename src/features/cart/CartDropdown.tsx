@@ -1,6 +1,7 @@
 import React from "react"
-import CustomButton from "../../components/CustomButton"
 import styled from "styled-components"
+
+import CustomButton from "../../components/CustomButton"
 
 const CartDropdownContainer = styled.div`
   width: 260px;

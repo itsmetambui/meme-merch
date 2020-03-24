@@ -12,12 +12,12 @@ const CollectionPreview: React.FC<CollectionPreviewProps> = ({
       <div className="flex flex-wrap justify-between -mx-8">
         {items
           .filter((item, idx) => idx < 4)
-          .map(collection => (
+          .map(item => (
             <div
-              key={collection.id}
+              key={item.id}
               className="w-full px-0 sm:px-8 sm:w-1/2 md:w-1/4"
             >
-              <CollectionItem {...collection} />
+              <CollectionItem {...item} />
             </div>
           ))}
       </div>
