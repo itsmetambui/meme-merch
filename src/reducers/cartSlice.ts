@@ -10,7 +10,7 @@ type CartItem = {
   price: number
 }
 
-type CartItemWithQuantity = CartItem & { quantity: number }
+export type CartItemWithQuantity = CartItem & { quantity: number }
 
 export type CartState = {
   isCartDropdownOpen: boolean
@@ -48,10 +48,8 @@ const cartSlide = createSlice({
 
 const selectCartItems = (state: AppState): CartItemWithQuantity[] =>
   state.cart.cartItems
-export const totalCartItemSelector = createSelector<
-  // According to https://github.com/reduxjs/reselect/blob/master/src/index.d.ts
-  // It should be AppState, but that didn't work
-  any,
+const totalCartItemSelector = createSelector<
+  AppState,
   CartItemWithQuantity[],
   number
 >(selectCartItems, (items: CartItemWithQuantity[]) =>
@@ -61,6 +59,7 @@ export const totalCartItemSelector = createSelector<
   ),
 )
 
-export const { toogleCartDropdown, addCartItem } = cartSlide.actions
+const { toogleCartDropdown, addCartItem } = cartSlide.actions
 
 export default cartSlide
+export { toogleCartDropdown, addCartItem, totalCartItemSelector }

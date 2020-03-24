@@ -2,6 +2,10 @@ import React from "react"
 import styled from "styled-components"
 
 import CustomButton from "../../components/CustomButton"
+import CartItem from "./CartItem"
+import { useSelector } from "react-redux"
+import { AppState } from "../../reducers/rootReducer"
+import { CartItemWithQuantity } from "../../reducers/cartSlice"
 
 const CartDropdownContainer = styled.div`
   width: 260px;
@@ -16,9 +20,15 @@ const CartItemsContainer = styled.div`
 `
 
 const CartDropdown: React.FC = () => {
+  const items = useSelector((state: AppState) => state.cart.cartItems)
+
   return (
     <CartDropdownContainer className="absolute flex flex-col p-6 bg-white border border-black border-solid">
-      <CartItemsContainer className="flex flex-col overflow-y-auto"></CartItemsContainer>
+      <CartItemsContainer className="flex flex-col overflow-y-auto">
+        {items.map((item: CartItemWithQuantity) => (
+          <CartItem key={item.id} {...item} />
+        ))}
+      </CartItemsContainer>
       <CustomButton className="mt-auto">GO TO CHECKOUT</CustomButton>
     </CartDropdownContainer>
   )

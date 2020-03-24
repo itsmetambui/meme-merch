@@ -11,7 +11,7 @@ import { AppDispatch } from "../../store"
 const CartIcon: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>()
   const totalCartItems = totalCartItemSelector(
-    useSelector<AppState>(state => state),
+    useSelector((state: AppState) => state),
   )
   return (
     <div
