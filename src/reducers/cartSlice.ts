@@ -51,6 +51,9 @@ const cartSlice = createSlice({
         item => item.id !== action.payload.id,
       )
     },
+    emptyCart: (state: CartState): void => {
+      state.cartItems = []
+    },
     updateCartItemQuantity: (
       state: CartState,
       action: PayloadAction<{ id: number; difference: number }>,
@@ -103,6 +106,7 @@ const {
   toogleCartDropdown,
   addCartItem,
   removeCartItem,
+  emptyCart,
   updateCartItemQuantity,
 } = cartSlice.actions
 
@@ -111,6 +115,7 @@ export {
   toogleCartDropdown,
   addCartItem,
   removeCartItem,
+  emptyCart,
   updateCartItemQuantity,
   totalCartItemSelector,
   totalPriceSelector,

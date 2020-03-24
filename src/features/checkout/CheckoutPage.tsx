@@ -5,6 +5,7 @@ import styled from "styled-components"
 import { AppState } from "../../reducers/rootReducer"
 import { totalPriceSelector } from "../../reducers/cartSlice"
 import CheckoutItem from "./CheckoutItem"
+import StripeButton from "../../components/StripeButton"
 
 const CheckoutPageContainer = styled.div`
   min-height: 90vh;
@@ -41,6 +42,12 @@ const Checkout: React.FC = () => {
         <span className="mt-4 text-xl text-center">Your cart is empty</span>
       )}
       <div className="mt-8 ml-auto text-2xl text-left">TOTAL: ${total}</div>
+      <StripeButton price={total} />
+      <div className="mt-8 text-xl text-center text-red-500">
+        *Please use the following test credit card for payments*
+        <br />
+        4242 4242 4242 4242 - Exp: 01/20 - CVV: 123
+      </div>
     </CheckoutPageContainer>
   )
 }

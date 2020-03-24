@@ -64,11 +64,14 @@ const generateStyle = ({ color = "black", variant = "contained" }) =>
 
 const CustomButton = forwardRef<HTMLButtonElement, CustomButtonProps>(
   (props, ref) => {
+    const disabledClassname = "cursor-not-allowed"
     return (
       <StyledButton
         {...props}
         ref={ref}
-        className={`w-auto h-16 px-12 text-sm font-bold tracking-wide uppercase transition-all duration-300 cursor-pointer min-w-40 ${props.className}`}
+        className={`w-auto h-16 px-12 text-sm font-bold tracking-wide uppercase transition-all duration-300 cursor-pointer min-w-40 ${
+          props.className ? props.className : ""
+        } ${props.disabled ? disabledClassname : ""}`}
       />
     )
   },
