@@ -3,9 +3,12 @@ import styled from "styled-components"
 
 import CustomButton from "../../components/CustomButton"
 import CartItem from "./CartItem"
-import { useSelector } from "react-redux"
+import { useSelector, useDispatch } from "react-redux"
 import { AppState } from "../../reducers/rootReducer"
-import { CartItemWithQuantity } from "../../reducers/cartSlice"
+import {
+  CartItemWithQuantity,
+  toogleCartDropdown,
+} from "../../reducers/cartSlice"
 import { useHistory } from "react-router-dom"
 
 const CartDropdownContainer = styled.div`
@@ -23,6 +26,7 @@ const CartItemsContainer = styled.div`
 const CartDropdown: React.FC = () => {
   const history = useHistory()
   const items = useSelector((state: AppState) => state.cart.cartItems)
+  const dispatch = useDispatch()
 
   return (
     <CartDropdownContainer className="absolute flex flex-col p-6 bg-white border border-black border-solid">
@@ -36,7 +40,10 @@ const CartDropdown: React.FC = () => {
         )}
       </CartItemsContainer>
       <CustomButton
-        onClick={() => history.push("/checkout")}
+        onClick={() => {
+          dispatch(toogleCartDropdown())
+          history.push("/checkout")
+        }}
         className="mt-auto"
       >
         GO TO CHECKOUT

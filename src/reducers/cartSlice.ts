@@ -19,17 +19,32 @@ export type CartState = {
 
 const initialState: CartState = {
   isCartDropdownOpen: false,
-  cartItems: [],
+  cartItems: [
+    {
+      id: 3,
+      name: "Brown Cowboy",
+      price: 35,
+      imageUrl: "https://i.ibb.co/QdJwgmp/brown-cowboy.png",
+      quantity: 1,
+    },
+    {
+      id: 4,
+      name: "Grey Brim",
+      price: 25,
+      imageUrl: "https://i.ibb.co/RjBLWxB/grey-brim.png",
+      quantity: 1,
+    },
+  ],
 }
 
 const cartSlide = createSlice({
   name: "cart",
   initialState,
   reducers: {
-    toogleCartDropdown: (state): void => {
+    toogleCartDropdown: (state: CartState): void => {
       state.isCartDropdownOpen = !state.isCartDropdownOpen
     },
-    addCartItem: (state, action: PayloadAction<CartItem>): void => {
+    addCartItem: (state: CartState, action: PayloadAction<CartItem>): void => {
       const itemId = action.payload.id
       const itemIndex = state.cartItems.findIndex(
         cartItem => cartItem.id === itemId,
@@ -43,11 +58,39 @@ const cartSlide = createSlice({
         })
       }
     },
+    removeCartItem: (
+      state: CartState,
+      action: PayloadAction<{ id: number }>,
+    ): void => {
+      state.cartItems = state.cartItems.filter(
+        item => item.id !== action.payload.id,
+      )
+    },
+    updateCartItemQuantity: (
+      state: CartState,
+      action: PayloadAction<{ id: number; difference: number }>,
+    ): void => {
+      const { id: itemId, difference } = action.payload
+      const itemIndex = state.cartItems.findIndex(
+        cartItem => cartItem.id === itemId,
+      )
+      if (itemIndex !== -1) {
+        const nextQuantity = state.cartItems[itemIndex].quantity + difference
+        if (nextQuantity === 0) {
+          state.cartItems = state.cartItems.filter(item => item.id !== itemId)
+        } else {
+          state.cartItems[itemIndex].quantity = nextQuantity
+        }
+      } else {
+        throw new Error("Item ID is not available")
+      }
+    },
   },
 })
 
 const selectCartItems = (state: AppState): CartItemWithQuantity[] =>
   state.cart.cartItems
+
 const totalCartItemSelector = createSelector<
   AppState,
   CartItemWithQuantity[],
@@ -59,7 +102,31 @@ const totalCartItemSelector = createSelector<
   ),
 )
 
-const { toogleCartDropdown, addCartItem } = cartSlide.actions
+const totalPriceSelector = createSelector<
+  AppState,
+  CartItemWithQuantity[],
+  number
+>(selectCartItems, (items: CartItemWithQuantity[]) =>
+  items.reduce(
+    (acc: number, cur: CartItemWithQuantity) =>
+      (acc += cur.quantity * cur.price),
+    0,
+  ),
+)
+
+const {
+  toogleCartDropdown,
+  addCartItem,
+  removeCartItem,
+  updateCartItemQuantity,
+} = cartSlide.actions
 
 export default cartSlide
-export { toogleCartDropdown, addCartItem, totalCartItemSelector }
+export {
+  toogleCartDropdown,
+  addCartItem,
+  removeCartItem,
+  updateCartItemQuantity,
+  totalCartItemSelector,
+  totalPriceSelector,
+}

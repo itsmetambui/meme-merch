@@ -7,7 +7,6 @@ import data from "../../config/shop-data"
 const HomePage: React.FC = () => {
   return (
     <div className="container py-10 mx-auto text-4xl font-bold">
-      <h1 className="mb-10 text-center">Welcome to my Homepage</h1>
       <div className="flex flex-wrap w-full">
         {data.sections.map(section => (
           <div
