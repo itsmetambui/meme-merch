@@ -3,9 +3,12 @@ import { useSelector } from "react-redux"
 
 import { AppState } from "../../reducers/rootReducer"
 import CollectionPreview from "./CollectionPreview"
+import { collectionsSelector } from "../../reducers/shopSlice"
 
 const CollectionOverview: React.FC = () => {
-  const collections = useSelector((state: AppState) => state.shop.collections)
+  const collections = collectionsSelector(
+    useSelector((state: AppState) => state),
+  )
 
   return (
     <div>

@@ -15,13 +15,15 @@ type Collection = {
   items: Item[]
 }
 
+type Collections = { [key: string]: Collection }
+
 export type ShopState = {
-  collections: Collection[]
+  collections: Collections
 }
 
 const initialState: ShopState = {
-  collections: [
-    {
+  collections: {
+    hats: {
       id: 1,
       title: "Hats",
       slug: "hats",
@@ -82,7 +84,7 @@ const initialState: ShopState = {
         },
       ],
     },
-    {
+    sneaker: {
       id: 2,
       title: "Sneakers",
       slug: "sneakers",
@@ -137,7 +139,7 @@ const initialState: ShopState = {
         },
       ],
     },
-    {
+    jackets: {
       id: 3,
       title: "Jackets",
       slug: "jackets",
@@ -174,7 +176,7 @@ const initialState: ShopState = {
         },
       ],
     },
-    {
+    womens: {
       id: 4,
       title: "Womens",
       slug: "womens",
@@ -223,7 +225,7 @@ const initialState: ShopState = {
         },
       ],
     },
-    {
+    mens: {
       id: 5,
       title: "Mens",
       slug: "mens",
@@ -266,7 +268,7 @@ const initialState: ShopState = {
         },
       ],
     },
-  ],
+  },
 }
 
 const shopSlice = createSlice({
@@ -275,13 +277,16 @@ const shopSlice = createSlice({
   reducers: {},
 })
 
+const collectionsSelector = createSelector<AppState, Collections, Collection[]>(
+  (state: AppState) => state.shop.collections,
+  collections => Object.keys(collections).map(key => collections[key]),
+)
+
 const collectionSelector = (collectionSlug: string | undefined) =>
-  createSelector<AppState, Collection[], Collection | undefined>(
+  createSelector<AppState, Collections, Collection | undefined>(
     (state: AppState) => state.shop.collections,
-    collections => {
-      return collections.find(collection => collection.slug === collectionSlug)
-    },
+    collections => (collectionSlug ? collections[collectionSlug] : undefined),
   )
 
 export default shopSlice
-export { collectionSelector }
+export { collectionsSelector, collectionSelector }
