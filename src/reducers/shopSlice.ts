@@ -1,4 +1,5 @@
-import { createSlice } from "@reduxjs/toolkit"
+import { createSlice, createSelector } from "@reduxjs/toolkit"
+import { AppState } from "./rootReducer"
 
 type Item = {
   id: number
@@ -10,7 +11,7 @@ type Item = {
 type Collection = {
   id: number
   title: string
-  routeName: string
+  slug: string
   items: Item[]
 }
 
@@ -23,7 +24,7 @@ const initialState: ShopState = {
     {
       id: 1,
       title: "Hats",
-      routeName: "hats",
+      slug: "hats",
       items: [
         {
           id: 1,
@@ -84,7 +85,7 @@ const initialState: ShopState = {
     {
       id: 2,
       title: "Sneakers",
-      routeName: "sneakers",
+      slug: "sneakers",
       items: [
         {
           id: 10,
@@ -139,7 +140,7 @@ const initialState: ShopState = {
     {
       id: 3,
       title: "Jackets",
-      routeName: "jackets",
+      slug: "jackets",
       items: [
         {
           id: 18,
@@ -176,7 +177,7 @@ const initialState: ShopState = {
     {
       id: 4,
       title: "Womens",
-      routeName: "womens",
+      slug: "womens",
       items: [
         {
           id: 23,
@@ -225,7 +226,7 @@ const initialState: ShopState = {
     {
       id: 5,
       title: "Mens",
-      routeName: "mens",
+      slug: "mens",
       items: [
         {
           id: 30,
@@ -274,4 +275,13 @@ const shopSlice = createSlice({
   reducers: {},
 })
 
+const collectionSelector = (collectionSlug: string | undefined) =>
+  createSelector<AppState, Collection[], Collection | undefined>(
+    (state: AppState) => state.shop.collections,
+    collections => {
+      return collections.find(collection => collection.slug === collectionSlug)
+    },
+  )
+
 export default shopSlice
+export { collectionSelector }

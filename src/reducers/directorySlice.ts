@@ -44,7 +44,7 @@ const initialState: DirectoryState = {
       imageUrl: "https://i.ibb.co/R70vBrQ/men.png",
       size: "large",
       id: 5,
-      linkUrl: "hatmenss",
+      linkUrl: "mens",
     },
   ],
 }

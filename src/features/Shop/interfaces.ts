@@ -8,6 +8,6 @@ export type CollectionItemProps = {
 export type CollectionPreviewProps = {
   id: number
   title: string
-  routeName: string
+  slug: string
   items: CollectionItemProps[]
 }

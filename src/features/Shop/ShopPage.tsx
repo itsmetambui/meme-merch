@@ -1,16 +1,18 @@
 import React from "react"
-
-import CollectionPreview from "./CollectionPreview"
-import { useSelector } from "react-redux"
-import { AppState } from "../../reducers/rootReducer"
+import { Route, useRouteMatch } from "react-router-dom"
+import CollectionOverview from "./CollectionOverview"
+import CollectionPage from "./CollectionPage"
 
 const SHOP: React.FC = () => {
-  const collections = useSelector((state: AppState) => state.shop.collections)
+  const match = useRouteMatch()
+
   return (
-    <div className="shop-page">
-      {collections.map(collection => (
-        <CollectionPreview key={collection.id} {...collection} />
-      ))}
+    <div>
+      <Route exact path={`${match.path}`} component={CollectionOverview} />
+      <Route
+        path={`${match.path}/:collectionSlug`}
+        component={CollectionPage}
+      />
     </div>
   )
 }

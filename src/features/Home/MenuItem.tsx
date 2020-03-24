@@ -5,14 +5,16 @@ type ItemProps = {
   title: string
   imageUrl: string
   size?: string
+  onClick?: () => void
 }
 
 const MenuItem: React.FC<ItemProps> = ({
   title,
   imageUrl,
   size,
+  onClick,
 }: ItemProps) => (
-  <div className={`${size} menu-item`}>
+  <div className={`${size} menu-item`} onClick={onClick}>
     <div
       className="background-image"
       style={{
