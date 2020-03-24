@@ -19,22 +19,7 @@ export type CartState = {
 
 const initialState: CartState = {
   isCartDropdownOpen: false,
-  cartItems: [
-    {
-      id: 3,
-      name: "Brown Cowboy",
-      price: 35,
-      imageUrl: "https://i.ibb.co/QdJwgmp/brown-cowboy.png",
-      quantity: 1,
-    },
-    {
-      id: 4,
-      name: "Grey Brim",
-      price: 25,
-      imageUrl: "https://i.ibb.co/RjBLWxB/grey-brim.png",
-      quantity: 1,
-    },
-  ],
+  cartItems: [],
 }
 
 const cartSlide = createSlice({
