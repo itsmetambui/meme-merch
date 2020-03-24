@@ -22,7 +22,7 @@ const initialState: CartState = {
   cartItems: [],
 }
 
-const cartSlide = createSlice({
+const cartSlice = createSlice({
   name: "cart",
   initialState,
   reducers: {
@@ -104,9 +104,9 @@ const {
   addCartItem,
   removeCartItem,
   updateCartItemQuantity,
-} = cartSlide.actions
+} = cartSlice.actions
 
-export default cartSlide
+export default cartSlice
 export {
   toogleCartDropdown,
   addCartItem,
