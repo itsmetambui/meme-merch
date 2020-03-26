@@ -31,9 +31,7 @@ const cartSlice = createSlice({
     },
     addCartItem: (state: CartState, action: PayloadAction<CartItem>): void => {
       const itemId = action.payload.id
-      const itemIndex = state.cartItems.findIndex(
-        cartItem => cartItem.id === itemId,
-      )
+      const itemIndex = state.cartItems.findIndex(cartItem => cartItem.id === itemId)
       if (itemIndex !== -1) {
         state.cartItems[itemIndex].quantity++
       } else {
@@ -43,25 +41,15 @@ const cartSlice = createSlice({
         })
       }
     },
-    removeCartItem: (
-      state: CartState,
-      action: PayloadAction<{ id: number }>,
-    ): void => {
-      state.cartItems = state.cartItems.filter(
-        item => item.id !== action.payload.id,
-      )
+    removeCartItem: (state: CartState, action: PayloadAction<{ id: number }>): void => {
+      state.cartItems = state.cartItems.filter(item => item.id !== action.payload.id)
     },
     emptyCart: (state: CartState): void => {
       state.cartItems = []
     },
-    updateCartItemQuantity: (
-      state: CartState,
-      action: PayloadAction<{ id: number; difference: number }>,
-    ): void => {
+    updateCartItemQuantity: (state: CartState, action: PayloadAction<{ id: number; difference: number }>): void => {
       const { id: itemId, difference } = action.payload
-      const itemIndex = state.cartItems.findIndex(
-        cartItem => cartItem.id === itemId,
-      )
+      const itemIndex = state.cartItems.findIndex(cartItem => cartItem.id === itemId)
       if (itemIndex !== -1) {
         const nextQuantity = state.cartItems[itemIndex].quantity + difference
         if (nextQuantity === 0) {
@@ -76,39 +64,20 @@ const cartSlice = createSlice({
   },
 })
 
-const selectCartItems = (state: AppState): CartItemWithQuantity[] =>
-  state.cart.cartItems
+const selectCartItems = (state: AppState): CartItemWithQuantity[] => state.cart.cartItems
 
-const totalCartItemSelector = createSelector<
-  AppState,
-  CartItemWithQuantity[],
-  number
->(selectCartItems, (items: CartItemWithQuantity[]) =>
-  items.reduce(
-    (acc: number, cur: CartItemWithQuantity) => (acc += cur.quantity),
-    0,
-  ),
+const totalCartItemSelector = createSelector<AppState, CartItemWithQuantity[], number>(
+  selectCartItems,
+  (items: CartItemWithQuantity[]) => items.reduce((acc: number, cur: CartItemWithQuantity) => (acc += cur.quantity), 0),
 )
 
-const totalPriceSelector = createSelector<
-  AppState,
-  CartItemWithQuantity[],
-  number
->(selectCartItems, (items: CartItemWithQuantity[]) =>
-  items.reduce(
-    (acc: number, cur: CartItemWithQuantity) =>
-      (acc += cur.quantity * cur.price),
-    0,
-  ),
+const totalPriceSelector = createSelector<AppState, CartItemWithQuantity[], number>(
+  selectCartItems,
+  (items: CartItemWithQuantity[]) =>
+    items.reduce((acc: number, cur: CartItemWithQuantity) => (acc += cur.quantity * cur.price), 0),
 )
 
-const {
-  toogleCartDropdown,
-  addCartItem,
-  removeCartItem,
-  emptyCart,
-  updateCartItemQuantity,
-} = cartSlice.actions
+const { toogleCartDropdown, addCartItem, removeCartItem, emptyCart, updateCartItemQuantity } = cartSlice.actions
 
 export default cartSlice
 export {

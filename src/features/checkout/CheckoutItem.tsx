@@ -2,10 +2,7 @@ import React from "react"
 import { useDispatch } from "react-redux"
 
 import { AppDispatch } from "../../store"
-import {
-  removeCartItem,
-  updateCartItemQuantity,
-} from "../../reducers/cartSlice"
+import { removeCartItem, updateCartItemQuantity } from "../../reducers/cartSlice"
 
 type CheckoutItemProps = {
   id: number
@@ -15,13 +12,7 @@ type CheckoutItemProps = {
   quantity: number
 }
 
-const CheckoutItem: React.FC<CheckoutItemProps> = ({
-  id,
-  name,
-  price,
-  imageUrl,
-  quantity,
-}) => {
+const CheckoutItem: React.FC<CheckoutItemProps> = ({ id, name, price, imageUrl, quantity }) => {
   const dispatch = useDispatch<AppDispatch>()
 
   return (
@@ -35,18 +26,14 @@ const CheckoutItem: React.FC<CheckoutItemProps> = ({
       <div className="flex-1 mr-4">
         <span
           className="px-2 text-xl font-bold cursor-pointer"
-          onClick={() =>
-            dispatch(updateCartItemQuantity({ id, difference: -1 }))
-          }
+          onClick={() => dispatch(updateCartItemQuantity({ id, difference: -1 }))}
         >
           &lt;
         </span>
         <span>{quantity}</span>
         <span
           className="px-2 text-xl font-bold cursor-pointer"
-          onClick={() =>
-            dispatch(updateCartItemQuantity({ id, difference: 1 }))
-          }
+          onClick={() => dispatch(updateCartItemQuantity({ id, difference: 1 }))}
         >
           &gt;
         </span>
@@ -55,10 +42,7 @@ const CheckoutItem: React.FC<CheckoutItemProps> = ({
         <span>${price}</span>
       </div>
       <div style={{ width: "8%" }}>
-        <span
-          className="px-2 text-xl font-bold cursor-pointer"
-          onClick={() => dispatch(removeCartItem({ id }))}
-        >
+        <span className="px-2 text-xl font-bold cursor-pointer" onClick={() => dispatch(removeCartItem({ id }))}>
           &#10005;
         </span>
       </div>
