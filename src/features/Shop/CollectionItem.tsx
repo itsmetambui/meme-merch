@@ -19,12 +19,7 @@ const ItemContainer = styled.div`
   }
 `
 
-const CollectionItem: React.FC<CollectionItemProps> = ({
-  id,
-  name,
-  price,
-  imageUrl,
-}) => {
+const CollectionItem: React.FC<CollectionItemProps> = ({ id, name, price, imageUrl }) => {
   const dispatch = useDispatch<AppDispatch>()
 
   return (

@@ -35,9 +35,7 @@ const Checkout: React.FC = () => {
         </div>
       </div>
       {cartItems.length ? (
-        cartItems.map(cartItem => (
-          <CheckoutItem key={cartItem.id} {...cartItem} />
-        ))
+        cartItems.map(cartItem => <CheckoutItem key={cartItem.id} {...cartItem} />)
       ) : (
         <span className="mt-4 text-xl text-center">Your cart is empty</span>
       )}

@@ -1,11 +1,6 @@
 import React, { Suspense, lazy, useEffect } from "react"
 import ReactDOM from "react-dom"
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Redirect,
-} from "react-router-dom"
+import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-dom"
 import { Provider, useSelector, useDispatch } from "react-redux"
 import { I18nProvider } from "@lingui/react"
 import { PersistGate } from "redux-persist/integration/react"
@@ -78,10 +73,7 @@ const App: React.FC = () => {
             <Route exact path="/" component={HomePage} />
             <Route path="/shop" component={ShopPage} />
             <Route path="/checkout" component={CheckoutPage} />
-            <Route
-              path="/auth"
-              render={() => (currentUser ? <Redirect to="/" /> : <AuthPage />)}
-            />
+            <Route path="/auth" render={() => (currentUser ? <Redirect to="/" /> : <AuthPage />)} />
           </Switch>
         </Suspense>
       </PersistGate>

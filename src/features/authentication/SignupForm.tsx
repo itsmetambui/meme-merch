@@ -12,16 +12,11 @@ type FormData = {
 }
 
 const SigninForm: React.FC = () => {
-  const { register, handleSubmit, getValues, watch, errors, reset } = useForm<
-    FormData
-  >()
+  const { register, handleSubmit, getValues, watch, errors, reset } = useForm<FormData>()
   const onSubmit = async (data: FormData) => {
     const { displayName, email, password } = data
     try {
-      const { user } = await auth.createUserWithEmailAndPassword(
-        email,
-        password,
-      )
+      const { user } = await auth.createUserWithEmailAndPassword(email, password)
       await createUserProfileDocument(user, { displayName })
       reset()
     } catch (error) {

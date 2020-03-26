@@ -14,16 +14,8 @@ const HomePage: React.FC = () => {
     <div className="container py-10 mx-auto text-4xl font-bold">
       <div className="flex flex-wrap w-full">
         {sections.map(section => (
-          <div
-            key={section.id}
-            className={`w-full md:${
-              section?.size === "large" ? "w-1/2" : "w-1/3"
-            }`}
-          >
-            <MenuItem
-              {...section}
-              onClick={() => history.push(`/shop/${section.linkUrl}`)}
-            />
+          <div key={section.id} className={`w-full md:${section?.size === "large" ? "w-1/2" : "w-1/3"}`}>
+            <MenuItem {...section} onClick={() => history.push(`/shop/${section.linkUrl}`)} />
           </div>
         ))}
       </div>

@@ -10,9 +10,7 @@ import { AppDispatch } from "../../store"
 
 const CartIcon: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>()
-  const totalCartItems = totalCartItemSelector(
-    useSelector((state: AppState) => state),
-  )
+  const totalCartItems = totalCartItemSelector(useSelector((state: AppState) => state))
   return (
     <div
       onClick={() => dispatch(toogleCartDropdown())}

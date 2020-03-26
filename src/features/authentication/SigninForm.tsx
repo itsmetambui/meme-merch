@@ -54,11 +54,7 @@ const SigninForm: React.FC = () => {
           <CustomButton className="w-full mr-4 md:w-auto" type="submit">
             Sign in
           </CustomButton>
-          <CustomButton
-            color="blue"
-            className="w-full md:w-auto"
-            onClick={signInWithGoogle}
-          >
+          <CustomButton color="blue" className="w-full md:w-auto" onClick={signInWithGoogle}>
             Sign in with Google
           </CustomButton>
         </div>

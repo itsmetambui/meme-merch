@@ -18,10 +18,7 @@ const FormInput = React.forwardRef<HTMLInputElement, FormInputProps>(
       <div className="mb-8 group">
         <input className="form-input" {...inputProps} ref={ref} />
         {label && (
-          <label
-            htmlFor={inputProps.name}
-            className={`${hasValue ? "shrink" : ""} form-input-label`}
-          >
+          <label htmlFor={inputProps.name} className={`${hasValue ? "shrink" : ""} form-input-label`}>
             {label}
           </label>
         )}

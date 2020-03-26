@@ -5,10 +5,7 @@ import CustomButton from "../../components/CustomButton"
 import CartItem from "./CartItem"
 import { useSelector, useDispatch } from "react-redux"
 import { AppState } from "../../reducers/rootReducer"
-import {
-  CartItemWithQuantity,
-  toogleCartDropdown,
-} from "../../reducers/cartSlice"
+import { CartItemWithQuantity, toogleCartDropdown } from "../../reducers/cartSlice"
 import { useHistory } from "react-router-dom"
 
 const CartDropdownContainer = styled.div`
@@ -32,9 +29,7 @@ const CartDropdown: React.FC = () => {
     <CartDropdownContainer className="absolute flex flex-col p-6 bg-white border border-black border-solid">
       <CartItemsContainer className="flex flex-col overflow-y-auto">
         {items.length ? (
-          items.map((item: CartItemWithQuantity) => (
-            <CartItem key={item.id} {...item} />
-          ))
+          items.map((item: CartItemWithQuantity) => <CartItem key={item.id} {...item} />)
         ) : (
           <span className="mt-20 text-xl text-center">Your cart is empty</span>
         )}

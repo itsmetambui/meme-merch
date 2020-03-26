@@ -42,7 +42,10 @@ const CheckoutItem: React.FC<CheckoutItemProps> = ({ id, name, price, imageUrl, 
         <span>${price}</span>
       </div>
       <div style={{ width: "8%" }}>
-        <span className="px-2 text-xl font-bold cursor-pointer" onClick={() => dispatch(removeCartItem({ id }))}>
+        <span
+          className="px-2 text-xl font-bold cursor-pointer"
+          onClick={() => dispatch(removeCartItem({ id }))}
+        >
           &#10005;
         </span>
       </div>

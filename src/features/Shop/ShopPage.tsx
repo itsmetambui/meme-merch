@@ -9,10 +9,7 @@ const SHOP: React.FC = () => {
   return (
     <div>
       <Route exact path={`${match.path}`} component={CollectionOverview} />
-      <Route
-        path={`${match.path}/:collectionSlug`}
-        component={CollectionPage}
-      />
+      <Route path={`${match.path}/:collectionSlug`} component={CollectionPage} />
     </div>
   )
 }

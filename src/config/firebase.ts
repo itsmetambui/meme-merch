@@ -25,9 +25,7 @@ const signInWithGoogle = () => auth.signInWithPopup(provider)
 const createUserProfileDocument = async (
   userAuth: firebase.User | null,
   additionalData?: any,
-): Promise<firebase.firestore.DocumentReference<
-  firebase.firestore.DocumentData
-> | null> => {
+): Promise<firebase.firestore.DocumentReference<firebase.firestore.DocumentData> | null> => {
   if (!userAuth) return null
   const userRef = firestore.doc(`users/${userAuth.uid}`)
   const snapShot = await userRef.get()

@@ -31,10 +31,7 @@ const Header: React.FC = () => {
         </Link>
         {currentUser ? (
           <>
-            <button
-              className="px-4 py-4 text-xl"
-              onClick={() => auth.signOut()}
-            >
+            <button className="px-4 py-4 text-xl" onClick={() => auth.signOut()}>
               SIGN OUT
             </button>
             <span className="px-4 py-4">{currentUser.email}</span>

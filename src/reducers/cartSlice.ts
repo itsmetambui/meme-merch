@@ -47,7 +47,10 @@ const cartSlice = createSlice({
     emptyCart: (state: CartState): void => {
       state.cartItems = []
     },
-    updateCartItemQuantity: (state: CartState, action: PayloadAction<{ id: number; difference: number }>): void => {
+    updateCartItemQuantity: (
+      state: CartState,
+      action: PayloadAction<{ id: number; difference: number }>,
+    ): void => {
       const { id: itemId, difference } = action.payload
       const itemIndex = state.cartItems.findIndex(cartItem => cartItem.id === itemId)
       if (itemIndex !== -1) {
@@ -68,7 +71,8 @@ const selectCartItems = (state: AppState): CartItemWithQuantity[] => state.cart.
 
 const totalCartItemSelector = createSelector<AppState, CartItemWithQuantity[], number>(
   selectCartItems,
-  (items: CartItemWithQuantity[]) => items.reduce((acc: number, cur: CartItemWithQuantity) => (acc += cur.quantity), 0),
+  (items: CartItemWithQuantity[]) =>
+    items.reduce((acc: number, cur: CartItemWithQuantity) => (acc += cur.quantity), 0),
 )
 
 const totalPriceSelector = createSelector<AppState, CartItemWithQuantity[], number>(
@@ -77,7 +81,13 @@ const totalPriceSelector = createSelector<AppState, CartItemWithQuantity[], numb
     items.reduce((acc: number, cur: CartItemWithQuantity) => (acc += cur.quantity * cur.price), 0),
 )
 
-const { toogleCartDropdown, addCartItem, removeCartItem, emptyCart, updateCartItemQuantity } = cartSlice.actions
+const {
+  toogleCartDropdown,
+  addCartItem,
+  removeCartItem,
+  emptyCart,
+  updateCartItemQuantity,
+} = cartSlice.actions
 
 export default cartSlice
 export {

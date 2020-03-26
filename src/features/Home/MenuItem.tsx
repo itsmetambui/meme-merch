@@ -8,12 +8,7 @@ type ItemProps = {
   onClick?: () => void
 }
 
-const MenuItem: React.FC<ItemProps> = ({
-  title,
-  imageUrl,
-  size,
-  onClick,
-}: ItemProps) => (
+const MenuItem: React.FC<ItemProps> = ({ title, imageUrl, size, onClick }: ItemProps) => (
   <div className={`${size} menu-item`} onClick={onClick}>
     <div
       className="background-image"

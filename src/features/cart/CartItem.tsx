@@ -1,12 +1,7 @@
 import React from "react"
 import { CartItemWithQuantity } from "../../reducers/cartSlice"
 
-const CartItem: React.FC<CartItemWithQuantity> = ({
-  name,
-  price,
-  imageUrl,
-  quantity,
-}) => {
+const CartItem: React.FC<CartItemWithQuantity> = ({ name, price, imageUrl, quantity }) => {
   return (
     <div className="flex flex-row w-full h-20 mb-4">
       <img src={imageUrl} alt="cart item" style={{ width: "30%" }} />

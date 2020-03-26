@@ -29,6 +29,7 @@
     "prebuild": "npm run build:css:prod && npm run i18n:compile",
     "build:css": "postcss tailwind.css -o src/tailwind-generated.css",
     "build:css:prod": "postcss tailwind.css -o src/tailwind-generated.css --env production",
+    "code:format": "prettier --ignore-path .gitignore \"**/*.{json,md,scss,yaml,yml,ts,tsx,js}\" --write",
     "cypress:open": "cypress open",
     "cypress:run": "cypress run",
     "test": "react-scripts test",

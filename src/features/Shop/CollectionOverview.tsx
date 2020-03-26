@@ -6,9 +6,7 @@ import CollectionPreview from "./CollectionPreview"
 import { collectionsSelector } from "../../reducers/shopSlice"
 
 const CollectionOverview: React.FC = () => {
-  const collections = collectionsSelector(
-    useSelector((state: AppState) => state),
-  )
+  const collections = collectionsSelector(useSelector((state: AppState) => state))
 
   return (
     <div>
