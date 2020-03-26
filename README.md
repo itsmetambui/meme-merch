@@ -1,17 +1,11 @@
 # Complete React - Redux - Typescript stack
 
-This repository is all you need to get started on a full-featured React app with Typescript. If you have a need for a solid Front-end stack to use on an entreprise level, this is a good place to start 👍.
-
-Read about how we created this stack and why we picked these libraries here:
-
-https://medium.com/@sidetrade_labs/modern-2020-react-stack-or-how-we-switched-away-from-angular-a9efb65d51e5
-
 ### It was bootstrapped with [Create React App](https://github.com/facebook/create-react-app) and uses:
 
 [Typescript](https://github.com/microsoft/TypeScript) because it's 2020  
 [React Router](https://github.com/ReactTraining/react-router) to handle client side routing  
-[Redux](https://github.com/reduxjs/react-redux) to handle State Management, with [Redux-saga](https://github.com/redux-saga/redux-saga) for async actions  
-[Ant Design](https://github.com/ant-design/ant-design) for its very complete set of components  
+[Redux](https://github.com/reduxjs/react-redux) to handle State Management, with [Redux-saga](https://github.com/redux-saga/redux-saga) for async actions, and
+[Redux-toolkit](https://redux-toolkit.js.org/) for simplicity
 [Styled Components](https://github.com/styled-components/styled-components) to extend Ant's default component styling  
 [TailwindCSS](https://github.com/tailwindcss/tailwindcss) to elegantly handle the rest of your app's UI  
 [React Hook Form](https://github.com/react-hook-form/react-hook-form) because forms shouldn't be a pain  
