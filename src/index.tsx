@@ -1,22 +1,14 @@
-import React, { Suspense, lazy, useEffect } from "react"
+import React from "react"
 import ReactDOM from "react-dom"
-import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-dom"
-import { Provider, useSelector, useDispatch } from "react-redux"
+import { Provider, useSelector } from "react-redux"
 import { I18nProvider } from "@lingui/react"
 import { PersistGate } from "redux-persist/integration/react"
 
 import { AppState } from "./reducers/rootReducer"
 import * as serviceWorker from "./serviceWorker"
-import store, { AppDispatch, persistor } from "./store"
+import store, { persistor } from "./store"
 import "./tailwind-generated.css"
-import Header from "./features/header/Header"
-import AuthPage from "./features/authentication/AuthPage"
-import ShopPage from "./features/shop/ShopPage"
-import CheckoutPage from "./features/checkout/CheckoutPage"
-import { auth, createUserProfileDocument } from "./config/firebase"
-import { setCurrentUser } from "./reducers/authSlice"
-
-const HomePage = lazy(() => import("./features/home/HomePage"))
+import App from "./App"
 
 const I18nWrapper: React.FC = () => {
   const locale = useSelector((state: AppState) => state.locale)
@@ -31,59 +23,11 @@ const I18nWrapper: React.FC = () => {
   )
 }
 
-const App: React.FC = () => {
-  const currentUser = useSelector((state: AppState) => state.auth.currentUser)
-  const dispatch = useDispatch<AppDispatch>()
-
-  useEffect(() => {
-    const unsubscribe = auth.onAuthStateChanged(async userAuth => {
-      if (userAuth) {
-        const userRef = await createUserProfileDocument(userAuth)
-
-        userRef?.onSnapshot(snapshot => {
-          const data = snapshot.data()
-          dispatch(
-            setCurrentUser({
-              id: snapshot.id,
-              email: data?.email,
-              displayName: data?.displayName,
-              createdAt: data?.createdAt.toDate().toJSON(),
-            }),
-          )
-        })
-      } else {
-        dispatch(setCurrentUser(null))
-      }
-    })
-    return () => unsubscribe()
-  }, [dispatch])
-
-  return (
-    <Router>
-      <PersistGate loading="Loading..." persistor={persistor}>
-        <Suspense
-          fallback={
-            <div className="pt-12 text-center">
-              <p>Loading...</p>
-            </div>
-          }
-        >
-          <Header />
-          <Switch>
-            <Route exact path="/" component={HomePage} />
-            <Route path="/shop" component={ShopPage} />
-            <Route path="/checkout" component={CheckoutPage} />
-            <Route path="/auth" render={() => (currentUser ? <Redirect to="/" /> : <AuthPage />)} />
-          </Switch>
-        </Suspense>
-      </PersistGate>
-    </Router>
-  )
-}
-
 ReactDOM.render(
   <Provider store={store}>
-    <I18nWrapper />
+    <PersistGate loading="Loading..." persistor={persistor}>
+      <I18nWrapper />
+    </PersistGate>
   </Provider>,
   document.getElementById("root"),
 )
